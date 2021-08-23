@@ -9,7 +9,7 @@ import org.springframework.vault.support.VaultTransitKeyCreationRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public class VaultService {
             File result = File.createTempFile(plainFile.getName()+"%", "-enc.txt");
             FileUtils.writeStringToFile(
                     result,
-                    base64Encrypted, Charset.defaultCharset());
+                    base64Encrypted, StandardCharsets.UTF_8);
             return result;
         } catch (IOException e) {
             log.error(e.getMessage(), e);
@@ -51,7 +51,7 @@ public class VaultService {
 
     public File decrypt(File cipherFile) {
         try {
-            String cipherFileContent = FileUtils.readFileToString(cipherFile, Charset.defaultCharset());
+            String cipherFileContent = FileUtils.readFileToString(cipherFile, StandardCharsets.UTF_8);
             String base64Encoded = decrypt(cipherFileContent);
             File result = File.createTempFile(UUID.randomUUID().toString(), ".png");
             byte[] decryptedFileContent = Base64.getDecoder().decode(base64Encoded);
