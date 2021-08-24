@@ -16,22 +16,22 @@ import java.util.UUID;
 @Service @Slf4j
 public class VaultService {
     private static final String KEY_TYPE = "aes128-gcm96";
-    private static final String KEY_ENCRYPT_STRING = "KEY_ENCRYPT_STRING";
+    private static final String KEY_ENCRYPT_KTP = "KEY_ENCRYPT_KTP";
 
     private VaultTransitOperations vaultTransit;
 
     public VaultService(VaultOperations vaultOperations) {
         vaultTransit = vaultOperations.opsForTransit();
-        vaultTransit.createKey(KEY_ENCRYPT_STRING,
+        vaultTransit.createKey(KEY_ENCRYPT_KTP,
                 VaultTransitKeyCreationRequest.ofKeyType(KEY_TYPE));
     }
 
     public String encrypt(String plaintext) {
-        return vaultTransit.encrypt(KEY_ENCRYPT_STRING, plaintext);
+        return vaultTransit.encrypt(KEY_ENCRYPT_KTP, plaintext);
     }
 
     public String decrypt(String cipherText) {
-        return vaultTransit.decrypt(KEY_ENCRYPT_STRING, cipherText);
+        return vaultTransit.decrypt(KEY_ENCRYPT_KTP, cipherText);
     }
 
     public File encrypt(File plainFile){
