@@ -36,8 +36,7 @@ public class VaultService {
 
     public File encrypt(File plainFile){
         try {
-            String base64Encoded = Base64.getEncoder().encodeToString(FileUtils.readFileToByteArray(plainFile));
-            String base64Encrypted = encrypt(base64Encoded);
+            String base64Encrypted = encrypt(FileUtils.readFileToByteArray(plainFile));
             File result = File.createTempFile(plainFile.getName()+"%", "-enc.txt");
             FileUtils.writeStringToFile(
                     result,
@@ -51,15 +50,20 @@ public class VaultService {
 
     public File decrypt(File cipherFile) {
         try {
-            String cipherFileContent = FileUtils.readFileToString(cipherFile, StandardCharsets.UTF_8);
-            String base64Encoded = decrypt(cipherFileContent);
             File result = File.createTempFile(UUID.randomUUID().toString(), ".png");
-            byte[] decryptedFileContent = Base64.getDecoder().decode(base64Encoded);
-            FileUtils.writeByteArrayToFile(result, decryptedFileContent);
+            FileUtils.writeByteArrayToFile(result, decryptFile(FileUtils.readFileToString(cipherFile, StandardCharsets.UTF_8)));
             return result;
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    public String encrypt(byte[] fileContent) {
+        return encrypt(Base64.getEncoder().encodeToString(fileContent));
+    }
+
+    public byte[] decryptFile(String encryptedFileContent) {
+        return Base64.getDecoder().decode(decrypt(encryptedFileContent));
     }
 }
