@@ -13,24 +13,24 @@
         <h4 class="mb-3">
             Masukkan data pribadi Anda
         </h4>
-        <form>
+        <form th:action="@{/member/form}" method="post" enctype="multipart/form-data">
             <div class="row g-4">
                 <div class="col-12">
                     <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama" required>
+                        <input type="text" class="form-control" name="nama" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <label for="noKtp" class="col-sm-2 col-form-label">No.KTP</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="noKtp" required>
+                        <input type="text" class="form-control" name="noKtp" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <label for="fileKtp" class="col-sm-2 col-form-label">Foto KTP</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" id="fileKtp" required>
+                        <input type="file" class="form-control" name="fileKtp" required>
                     </div>
                 </div>
                 <div class="col-12">
