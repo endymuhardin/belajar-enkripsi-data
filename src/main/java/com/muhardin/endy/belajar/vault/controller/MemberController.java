@@ -4,6 +4,8 @@ import com.muhardin.endy.belajar.vault.dao.MemberDao;
 import com.muhardin.endy.belajar.vault.entity.Member;
 import com.muhardin.endy.belajar.vault.service.MemberInputService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.file.Files;
 
 @Controller
 @RequestMapping("/member")
@@ -44,6 +47,16 @@ public class MemberController {
 
     @GetMapping("/list")
     public ModelMap viewData() {
-        return new ModelMap();
+        return new ModelMap()
+                .addAttribute(memberDao.findAll());
     }
+
+    @GetMapping("/{id}/ktp")
+    public ResponseEntity<byte[]> getFotoKtp(@PathVariable("id") Member member) {
+        byte[] data = memberInputService.getFileKtp(member);
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(member.getFileKtpMimeType()))
+                .body(data);
+    }
+
 }

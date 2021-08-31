@@ -13,6 +13,15 @@
         <h4 class="mb-3">
             Data pribadi user
         </h4>
+
+        <div class="card" style="width: 24rem;"  th:each="member : ${memberList}">
+            <img class="card-img-top"
+                 th:src="@{/member/{memberId}/ktp(memberId=${member.id})}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${'Nama : ' + member.nama}">Card title</h5>
+                <p class="card-text" th:text="${'No. KTP : ' + member.noKtp}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
     </div>
 
 </section>
