@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Confidential Data</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="row align-items-md-stretch">
+        <h4 class="mb-3">
+            Masukkan data pribadi Anda
+        </h4>
+        <form>
+            <div class="row g-4">
+                <div class="col-12">
+                    <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="noKtp" class="col-sm-2 col-form-label">No.KTP</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="noKtp" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="fileKtp" class="col-sm-2 col-form-label">Foto KTP</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="fileKtp" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Simpan Data</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+</body>
+</html>
