@@ -14,28 +14,34 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j @Profile("default")
+@Slf4j @Profile("encrypted")
 @Service @Transactional
-public class PlainMemberService implements MemberInputService {
+public class EncryptedMemberService implements MemberInputService {
 
     @Value("${file.upload.folder}")
     private String fileUploadFolder;
 
     @Autowired private MemberDao memberDao;
+    @Autowired private VaultService vaultService;
 
-    private MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();;
+    private MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
 
     @Override
     public void save(Member member, MultipartFile fileKtp) {
+
         try {
             member.setFileKtpMimeType(fileTypeMap.getContentType(fileKtp.getOriginalFilename()));
+            member.setNoKtp(vaultService.encrypt(member.getNoKtp()));
             memberDao.save(member);
             String destinationFilename = fileUploadFolder + File.separator + member.getId();
             log.info("Upload file to {}", destinationFilename);
-            fileKtp.transferTo(new File(destinationFilename));
+            FileUtils.writeStringToFile(new File(destinationFilename),
+                    vaultService.encrypt(fileKtp.getBytes()),
+                    StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -45,7 +51,8 @@ public class PlainMemberService implements MemberInputService {
     public byte[] getFileKtp(Member member) {
         try {
             String filename = fileUploadFolder + File.separator + member.getId();
-            return FileUtils.readFileToByteArray(new File(filename));
+            return vaultService.decryptFile(
+                    FileUtils.readFileToString(new File(filename), StandardCharsets.UTF_8));
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -57,7 +64,7 @@ public class PlainMemberService implements MemberInputService {
         List<Member> memberList = new ArrayList<>();
         memberDao.findAll()
                 .forEach(member -> {
-                    member.setNoKtpPlain(member.getNoKtp());
+                    member.setNoKtpPlain(vaultService.decrypt(member.getNoKtp()));
                     memberList.add(member);
                 });
         return memberList;

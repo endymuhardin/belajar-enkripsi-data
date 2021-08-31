@@ -24,5 +24,8 @@ public class Member {
     @NotNull @NotEmpty
     private String noKtp;
 
+    @Transient
+    private String noKtpPlain;
+
     private String fileKtpMimeType;
 }
