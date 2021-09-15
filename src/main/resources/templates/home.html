@@ -50,6 +50,8 @@
                     <h1 class="display-5 fw-bold">Input Data Pribadi Anda</h1>
                     <p class="col-md-8 fs-4">Dalam aplikasi ini, kita bisa melihat cara enkripsi data pribadi berupa NIK dan scan KTP</p>
                     <a th:href="@{/member/form}" class="btn btn-primary btn-lg" role="button">Input Data</a>
+                    <a target="_blank" th:href="@{/h2-console}" class="btn btn-lg btn-info" role="button">Lihat Database</a>
+                    <a target="_blank" th:href="@{${'file://'+ fileUploadFolder+'/'}}" class="btn btn-lg btn-outline-secondary" role="button">Lihat Folder</a>
                 </div>
             </div>
 
@@ -65,9 +67,6 @@
                                 mvn clean spring-boot:run
                             </code>
                         </p>
-                        <p>
-                            <a th:href="@{/member/list}" class="btn btn-outline-light" role="button">Lihat Data</a>
-                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -80,9 +79,6 @@
                             <code>
                                 SPRING_PROFILES_ACTIVE=encrypted mvn clean spring-boot:run
                             </code>
-                        </p>
-                        <p>
-                            <a th:href="@{/member/list}" class="btn btn-outline-secondary" role="button">Lihat Data</a>
                         </p>
                     </div>
                 </div>
