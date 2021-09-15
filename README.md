@@ -144,5 +144,62 @@
     transit/      transit      transit_39891d6a      n/a
     ```
 
-4. Jalankan `VaultServiceTests`. Kemudian cek hasilnya
+4. Generate key enkripsi untuk file KTP
 
+    ```
+    vault write -f transit/keys/data-ktp
+    ```
+    
+    Outputnya seperti ini 
+
+    ```
+    Success! Data written to: transit/keys/data-ktp
+    ```
+
+5. Lihat daftar key dalam secret engine `transit`
+
+    ```
+    vault list transit/keys
+    ```
+
+    Outputnya seperti ini
+
+    ```
+    Keys
+    ----
+    data-ktp
+    ```
+
+6. Lihat info detail key `data-ktp`
+
+    ```
+    vault read transit/keys/data-ktp
+    ```
+
+    Outputnya seperti ini
+
+    ```
+    Key                       Value
+    ---                       -----
+    allow_plaintext_backup    false
+    deletion_allowed          false
+    derived                   false
+    exportable                false
+    keys                      map[1:1631694403]
+    latest_version            1
+    min_available_version     0
+    min_decryption_version    1
+    min_encryption_version    0
+    name                      data-ktp
+    supports_decryption       true
+    supports_derivation       true
+    supports_encryption       true
+    supports_signing          false
+    type                      aes256-gcm96
+    ```
+
+7. Jalankan aplikasi
+
+    ```
+    SPRING_PROFILES_ACTIVE=encrypted mvn clean spring-boot:run
+    ```

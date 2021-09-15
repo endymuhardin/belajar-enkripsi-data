@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.vault.core.VaultOperations;
 import org.springframework.vault.core.VaultTransitOperations;
-import org.springframework.vault.support.VaultTransitKeyCreationRequest;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,23 +14,20 @@ import java.util.UUID;
 
 @Service @Slf4j
 public class VaultService {
-    private static final String KEY_TYPE = "aes128-gcm96";
-    private static final String KEY_ENCRYPT_KTP = "KEY_ENCRYPT_KTP";
+    private static final String KEY_NAME_ENCRYPT_KTP = "data-ktp";
 
     private VaultTransitOperations vaultTransit;
 
     public VaultService(VaultOperations vaultOperations) {
         vaultTransit = vaultOperations.opsForTransit();
-        vaultTransit.createKey(KEY_ENCRYPT_KTP,
-                VaultTransitKeyCreationRequest.ofKeyType(KEY_TYPE));
     }
 
     public String encrypt(String plaintext) {
-        return vaultTransit.encrypt(KEY_ENCRYPT_KTP, plaintext);
+        return vaultTransit.encrypt(KEY_NAME_ENCRYPT_KTP, plaintext);
     }
 
     public String decrypt(String cipherText) {
-        return vaultTransit.decrypt(KEY_ENCRYPT_KTP, cipherText);
+        return vaultTransit.decrypt(KEY_NAME_ENCRYPT_KTP, cipherText);
     }
 
     public File encrypt(File plainFile){
