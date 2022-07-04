@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html}">
+<html lang="en" th:replace="~{template :: layout(~{::title}, ~{::section})}">
 <head>
     <meta charset="UTF-8">
     <title>Input Confidential Data</title>
 </head>
 <body>
-<section layout:fragment="content">
+<section>
 
     <div class="row align-items-md-stretch">
         <h4 class="mb-3">
