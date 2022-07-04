@@ -1,4 +1,4 @@
-package com.muhardin.endy.belajar.vault.entity;
+package com.muhardin.endy.belajar.enkripsi.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;

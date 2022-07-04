@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 
+import com.muhardin.endy.belajar.enkripsi.service.VaultService;
+
 import java.io.File;
 import java.io.IOException;
 

@@ -198,8 +198,10 @@
     type                      aes256-gcm96
     ```
 
-7. Jalankan aplikasi
+7. Copy `Root Token` ke variabel `vault.token` di file `application.properties`
+
+8. Jalankan aplikasi
 
     ```
-    SPRING_PROFILES_ACTIVE=encrypted mvn clean spring-boot:run
+    SPRING_PROFILES_ACTIVE=vault mvn clean spring-boot:run
     ```

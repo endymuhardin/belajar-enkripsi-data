@@ -8,11 +8,11 @@
 		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.muhardin.endy.belajar.vault</groupId>
-	<artifactId>belajar-vault</artifactId>
+	<groupId>com.muhardin.endy.belajar.enkripsi</groupId>
+	<artifactId>belajar-enkripsi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>belajar-vault</name>
-	<description>Belajar Vault dengan Spring Boot</description>
+	<description>Belajar Enkripsi Data dengan Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-vault.version>2.3.1</spring-vault.version>

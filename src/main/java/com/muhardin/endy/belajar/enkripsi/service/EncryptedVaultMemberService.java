@@ -1,7 +1,5 @@
-package com.muhardin.endy.belajar.vault.service;
+package com.muhardin.endy.belajar.enkripsi.service;
 
-import com.muhardin.endy.belajar.vault.dao.MemberDao;
-import com.muhardin.endy.belajar.vault.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.muhardin.endy.belajar.enkripsi.dao.MemberDao;
+import com.muhardin.endy.belajar.enkripsi.entity.Member;
+
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +19,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j @Profile("encrypted")
+@Slf4j @Profile("vault")
 @Service @Transactional
-public class EncryptedMemberService implements MemberInputService {
+public class EncryptedVaultMemberService implements MemberInputService {
 
     @Value("${file.upload.folder}")
     private String fileUploadFolder;

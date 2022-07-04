@@ -1,4 +1,4 @@
-package com.muhardin.endy.belajar.vault.controller;
+package com.muhardin.endy.belajar.enkripsi.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

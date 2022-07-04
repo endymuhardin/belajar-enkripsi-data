@@ -1,4 +1,4 @@
-package com.muhardin.endy.belajar.vault.config;
+package com.muhardin.endy.belajar.enkripsi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
