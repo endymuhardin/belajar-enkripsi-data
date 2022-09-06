@@ -1,4 +1,25 @@
-# Enkripsi Data dengan Vault #
+# Fitur Aplikasi #
+
+* Simpan No KTP
+* Upload scan KTP
+
+## Tanpa Enkripsi ##
+
+Jalankan aplikasi secara normal
+
+```
+mvn clean spring-boot:run
+```
+
+## Enkripsi Data dengan AES ##
+
+Jalankan aplikasi menggunakan profile `aeslocal`
+
+```
+SPRING_ACTIVE_PROFILES=aeslocal mvn clean spring-boot:run
+```
+
+## Enkripsi Data dengan Vault ##
 
 1. Jalankan Vault Server
 
