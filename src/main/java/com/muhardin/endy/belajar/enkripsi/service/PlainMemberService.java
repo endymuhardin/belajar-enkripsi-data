@@ -15,6 +15,8 @@ import com.muhardin.endy.belajar.enkripsi.entity.Member;
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class PlainMemberService implements MemberInputService {
     @Override
     public void save(Member member, MultipartFile fileKtp) {
         try {
+            Files.createDirectories(Paths.get(fileUploadFolder));
             member.setFileKtpMimeType(fileTypeMap.getContentType(fileKtp.getOriginalFilename()));
             memberDao.save(member);
             String destinationFilename = fileUploadFolder + File.separator + member.getId();
