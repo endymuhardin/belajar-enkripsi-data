@@ -226,3 +226,16 @@ SPRING_ACTIVE_PROFILES=aeslocal mvn clean spring-boot:run
     ```
     SPRING_PROFILES_ACTIVE=vault mvn clean spring-boot:run
     ```
+
+## TODO ##
+
+* Buat interface `SecureValue` dengan method `encrypt` dan `decrypt`
+* Entity yang memiliki secure property harus implement ini
+* Buat entity listener `SecureValueListener`
+
+    * `PrePersist` : encrypt field yang rahasia
+    * `PostLoad` : decrypt field yang rahasia
+
+## Referensi ##
+
+* https://www.bytefish.de/blog/spring_boot_multitenancy_entity_listeners.html
