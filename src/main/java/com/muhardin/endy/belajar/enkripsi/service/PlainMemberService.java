@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.muhardin.endy.belajar.enkripsi.dao.MemberDao;
 import com.muhardin.endy.belajar.enkripsi.entity.Member;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,13 +28,11 @@ public class PlainMemberService implements MemberInputService {
 
     @Autowired private MemberDao memberDao;
 
-    private MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();;
-
     @Override
     public void save(Member member, MultipartFile fileKtp) {
         try {
             Files.createDirectories(Paths.get(fileUploadFolder));
-            member.setFileKtpMimeType(fileTypeMap.getContentType(fileKtp.getOriginalFilename()));
+            member.setFileKtpMimeType(Files.probeContentType(new File(fileKtp.getOriginalFilename()).toPath()));
             memberDao.save(member);
             String destinationFilename = fileUploadFolder + File.separator + member.getId();
             log.info("Upload file to {}", destinationFilename);

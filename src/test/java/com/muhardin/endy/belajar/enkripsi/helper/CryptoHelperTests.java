@@ -1,8 +1,6 @@
-package com.muhardin.endy.belajar.vault.helper;
+package com.muhardin.endy.belajar.enkripsi.helper;
 
 import org.junit.jupiter.api.Test;
-
-import com.muhardin.endy.belajar.enkripsi.helper.CryptoHelper;
 
 public class CryptoHelperTests {
     

@@ -1,4 +1,4 @@
-package com.muhardin.endy.belajar.vault.service;
+package com.muhardin.endy.belajar.enkripsi.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
-
-import com.muhardin.endy.belajar.enkripsi.service.VaultService;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +30,7 @@ public class VaultServiceTests {
 
     @Test
     public void testDecryptString() {
-        String encryptedNik = "vault:v1:OZPO/nkobDFqMsCF5snQGgWoUtLdt2tp/lmr9zF/TAV4rRnH+A==";
+        String encryptedNik = "vault:v1:mXI3thbvr6pLmNPto9CPjrwH2Uk6zcvvRpZHuJfTOSf34axRUA==";
         String decryptedNik = vaultService.decrypt(encryptedNik);
         Assertions.assertNotNull(decryptedNik);
         System.out.println("Decrypted : " + decryptedNik);

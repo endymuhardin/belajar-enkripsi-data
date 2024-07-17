@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -40,12 +39,11 @@ public class EncryptedLocalFileMemberService implements MemberInputService {
     @Autowired private CryptoHelper cryptoHelper;
     @Autowired private MemberDao memberDao;
 
-    private MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
-
     @Override
     public void save(Member member, MultipartFile fileKtp) {
         try {
-            member.setFileKtpMimeType(fileTypeMap.getContentType(fileKtp.getOriginalFilename()));
+            
+            member.setFileKtpMimeType(Files.probeContentType(new File(fileKtp.getOriginalFilename()).toPath()));
             member.setNoKtp(Base64.getEncoder().encodeToString(
                 cryptoHelper.encrypt(member.getNoKtp().getBytes())));
             memberDao.save(member);

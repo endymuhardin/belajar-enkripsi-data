@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.muhardin.endy.belajar.enkripsi.dao.MemberDao;
 import com.muhardin.endy.belajar.enkripsi.entity.Member;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +29,11 @@ public class EncryptedVaultMemberService implements MemberInputService {
     @Autowired private MemberDao memberDao;
     @Autowired private VaultService vaultService;
 
-    private MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
-
     @Override
     public void save(Member member, MultipartFile fileKtp) {
 
         try {
-            member.setFileKtpMimeType(fileTypeMap.getContentType(fileKtp.getOriginalFilename()));
+            member.setFileKtpMimeType(Files.probeContentType(new File(fileKtp.getOriginalFilename()).toPath()));
             member.setNoKtp(vaultService.encrypt(member.getNoKtp()));
             memberDao.save(member);
             String destinationFilename = fileUploadFolder + File.separator + member.getId();

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.muhardin.endy.belajar.enkripsi.entity.Member;
 import com.muhardin.endy.belajar.enkripsi.service.MemberInputService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/member")
