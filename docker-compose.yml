@@ -1,0 +1,8 @@
+services:
+  vault:
+    image: hashicorp/vault
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: token-development-123
+    ports:
+      - 8200:8200
+    privileged: true
