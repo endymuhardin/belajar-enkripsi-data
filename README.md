@@ -27,6 +27,12 @@ SPRING_ACTIVE_PROFILES=aeslocal mvn clean spring-boot:run
     vault server -dev
     ```
 
+    Atau dengan docker compose seperti ini
+
+    ```
+    docker compose up
+    ```
+
     Outputnya seperti ini
 
     ```
